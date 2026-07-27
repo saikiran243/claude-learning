@@ -1,10 +1,41 @@
+# Node modules - Skip for lightweight repo
+node_modules/
+**/node_modules/
+
+# Environment and secrets
 .env
 .env.local
 *.key
 *.pem
+*.p12
+
+# Databases
+*.db
+*.sqlite
 data/*.db
+
+# Logs and temporary files
 *.log
+*.tmp
 .claude/logs/
-.claude/checkpoints/
+
+# Build artifacts
 dist/
 coverage/
+.nyc_output/
+report.json
+lighthouse-report.json
+
+# Checkpoints and sessions
+.claude/checkpoints/
+*.session
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
