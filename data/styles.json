@@ -1,0 +1,50 @@
+[
+  {
+    "id": "suit-navy-two-button",
+    "category": "suits",
+    "name": "Navy Two-Button Suit",
+    "description": "Cornerstone of every gentleman's wardrobe. Italian Super 130's wool.",
+    "features": [
+      "Super 130's Italian Wool",
+      "Natural Shoulder",
+      "Notch Lapel",
+      "Functioning Buttonholes",
+      "Half Canvas Construction"
+    ],
+    "customizations": {
+      "fabric": [
+        "Navy Super 130's",
+        "Navy Super 150's",
+        "Midnight Blue Flannel",
+        "Navy Hopsack",
+        "Navy Fresco"
+      ],
+      "lapel": [
+        "Notch (Classic)",
+        "Peak (Formal)",
+        "Notch with Peak Accent"
+      ],
+      "buttons": [
+        "2-Button (Standard)",
+        "3-Button (Traditional)",
+        "1-Button (Modern)"
+      ],
+      "vents": [
+        "Double Vent (Classic)",
+        "Single Vent (Traditional)",
+        "No Vent (Clean)"
+      ],
+      "lining": [
+        "Bemberg Navy",
+        "Bemberg Burgundy",
+        "Custom Monogram",
+        "Silk Paisley"
+      ],
+      "pockets": [
+        "Flap Pockets",
+        "Jetted Pockets",
+        "Patch Pockets (Casual)"
+      ]
+    }
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/saikiranshanigarapu/practise/claude-practise"]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "sqlite": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sqlite", "jagger.db"]
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
+    },
+    "tailoring-catalog": {
+      "command": "node",
+      "args": [".claude/mcp-servers/tailoring-catalog/index.js"],
+      "env": {
+        "CATALOG_PATH": "./data/styles.json",
+        "ORDERS_DB": "./data/orders.db"
+      }
+    },
+    "design-system": {
+      "command": "node",
+      "args": [".claude/mcp-servers/design-system/index.js"]
+    },
+    "analytics": {
+      "command": "node",
+      "args": [".claude/mcp-servers/analytics/index.js"],
+      "env": {
+        "ANALYTICS_DB": "./data/analytics.db"
+      }
+    }
+  }
+}

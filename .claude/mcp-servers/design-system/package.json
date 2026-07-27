@@ -1,0 +1,14 @@
+{
+  "name": "design-system-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Jagger design system tokens and components",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  }
+}

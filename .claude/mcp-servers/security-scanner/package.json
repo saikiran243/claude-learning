@@ -1,0 +1,17 @@
+{
+  "name": "security-scanner-mcp",
+  "version": "1.0.0",
+  "description": "Security scanner MCP for infrastructure and AI code - tfsec/kubeaudit equivalent for Claude Code",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.22.0"
+  },
+  "keywords": ["security", "scanner", "terraform", "kubernetes", "ci-cd"],
+  "license": "MIT"
+}

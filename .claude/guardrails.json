@@ -1,0 +1,124 @@
+{
+  "schema": {
+    "version": "1.0.0",
+    "rules": [
+      {
+        "id": "no-hardcoded-colors",
+        "pattern": ["#[0-9a-fA-F]{3,8}", "rgb\\([^)]+\\)", "rgba\\([^)]+\\)"],
+        "severity": "warning",
+        "description": "Hardcoded colors should use CSS custom properties",
+        "fix": "Replace with var(--color-{name})",
+        "files": ["*.css", "*.js"]
+      },
+      {
+        "id": "no-hardcoded-spacing",
+        "pattern": ["\\b(8|12|16|20|24|32|40|48|56|64)(px|rem)\\b"],
+        "severity": "info",
+        "description": "Hardcoded spacing should use CSS custom properties",
+        "fix": "Replace with var(--space-{size})",
+        "files": ["*.css", "*.js"]
+      },
+      {
+        "id": "no-console-log-prod",
+        "pattern": ["console\\.log\\([^&]'"],
+        "severity": "warning",
+        "description": "Console.log statements should be removed for production",
+        "fix": "Remove or replace with proper logging",
+        "files": ["*.js"],
+        "except": ["*.test.js", "*.spec.js"]
+      },
+      {
+        "id": "missing-alt-text",
+        "pattern": ["<img[^>]*?(?<!alt=)[^>]*?>"],
+        "severity": "error",
+        "description": "All images must have alt attribute",
+        "fix": "Add alt=\"description\" attribute",
+        "files": ["*.html"]
+      },
+      {
+        "id": "missing-form-labels",
+        "pattern": ["<input[^>]*?(?<!id=)[^>]*?>(?!.*<label[^>]*for=)"],
+        "severity": "error",
+        "description": "All form inputs must have associated labels",
+        "fix": "Add label with for attribute matching input id",
+        "files": ["*.html"]
+      },
+      {
+        "id": "accessibility-aria",
+        "pattern": ["role=\"[^\"]+\"[^>]*?(?<!aria-)"],
+        "severity": "warning",
+        "description": "Elements with roles should have proper ARIA attributes",
+        "fix": "Add aria-label, aria-describedby, or other needed ARIA attributes",
+        "files": ["*.html"]
+      },
+      {
+        "id": "no-inline-styles",
+        "pattern": ["style=['\"][^'\"]+['\"]"],
+        "severity": "error",
+        "description": "Inline styles should be avoided",
+        "fix": "Move to CSS file",
+        "files": ["*.html", "*.js"]
+      },
+      {
+        "id": "no-eval-new-function",
+        "pattern": ["eval\\(", "new Function\\("],
+        "severity": "error",
+        "description": "eval() and new Function() are security risks",
+        "fix": "Use JSON.parse() or other safe alternatives",
+        "files": ["*.js"]
+      },
+      {
+        "id": "no-innerHTML-user",
+        "pattern": ["innerHTML\\s*=\\s*[^'\\\"](?!['\\\"][*]|['\\\"]\\s*['\\\"])"],
+        "severity": "error",
+        "description": "innerHTML with user data is XSS risk",
+        "fix": "Use textContent or sanitize with DOMPurify",
+        "files": ["*.js"]
+      }
+    ]
+  },
+  "security": {
+    "patterns": [
+      {
+        "id": "hardcoded-secrets",
+        "pattern": ["(api_key|apikey|secret|password|token|auth)['\"\\s]*[:=]\\s*['\\\"][a-zA-Z0-9]{20,}['\\\"]", "AWS_ACCESS_KEY", "PRIVATE_KEY", "DATABASE_URL"],
+        "severity": "critical",
+        "description": "Hardcoded secrets detected - should use environment variables",
+        "fix": "Move to .env file and use process.env"
+      },
+      {
+        "id": "sql-injection-potential",
+        "pattern": ["\\b(SELECT|INSERT|UPDATE|DELETE|DROP)\\b.*\\$\\{"],
+        "severity": "critical",
+        "description": "Potential SQL injection - use parameterized queries",
+        "fix": "Use prepared statements or ORM"
+      },
+      {
+        "id": "unsafe-html-insert",
+        "pattern": ["\\.html\\(['\"](?!['\"])[^\"']*['\"]", "document\\.write\\("],
+        "severity": "high",
+        "description": "Potential XSS vulnerability",
+        "fix": "Use textContent or sanitize"
+      }
+    ]
+  },
+  "quality": {
+    "maxFileSize": {
+      "limit": 100000,
+      "severity": "warning",
+      "description": "Large files should be split into modules"
+    },
+    "maxComplexity": {
+      "functions": 50,
+      "depth": 5,
+      "severity": "info",
+      "description": "High cyclomatic complexity - consider refactoring"
+    },
+    "maxDependencies": {
+      "frontend": 5,
+      "backend": 20,
+      "severity": "info",
+      "description": "Too many dependencies can impact performance"
+    }
+  }
+}

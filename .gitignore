@@ -1,0 +1,10 @@
+.env
+.env.local
+*.key
+*.pem
+data/*.db
+*.log
+.claude/logs/
+.claude/checkpoints/
+dist/
+coverage/

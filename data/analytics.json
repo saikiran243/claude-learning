@@ -1,0 +1,36 @@
+{
+  "events": [],
+  "sessions": [],
+  "funnels": [
+    {
+      "name": "Style Selection to Order",
+      "steps": [
+        "view_styles",
+        "view_style_detail",
+        "select_style",
+        "customize",
+        "start_checkout",
+        "complete_order"
+      ]
+    },
+    {
+      "name": "Contact Form Funnel",
+      "steps": [
+        "view_contact",
+        "start_form",
+        "submit_form",
+        "confirmation"
+      ]
+    },
+    {
+      "name": "Style Gallery Funnel",
+      "steps": [
+        "view_gallery",
+        "filter_category",
+        "view_detail",
+        "add_to_selection"
+      ]
+    }
+  ],
+  "revenue": []
+}

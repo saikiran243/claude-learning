@@ -1,0 +1,23 @@
+{
+  "name": "tailoring-catalog-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Jagger Tailoring catalog operations",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "better-sqlite3": "^13.0.1",
+    "zod": "^3.22.0"
+  },
+  "keywords": [
+    "mcp",
+    "tailoring",
+    "catalog",
+    "jagger"
+  ],
+  "license": "MIT"
+}

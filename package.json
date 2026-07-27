@@ -1,0 +1,37 @@
+{
+  "name": "jagger-tailors",
+  "version": "1.0.0",
+  "description": "Jagger - Premium Men's Custom Tailoring Website (Claude Code Certification Project)",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'No build step - static site'",
+    "lint": "eslint script.js styles.css index.html --ext .js,.css,.html",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "playwright test",
+    "test:unit": "vitest",
+    "test:e2e": "playwright test",
+    "a11y": "axe-cli http://localhost:8000",
+    "lighthouse": "lighthouse http://localhost:8000 --output=json --output-path=./report.json",
+    "audit": "node .claude/scripts/validate.js",
+    "mcp:start": "echo 'Use /mcp connect in Claude Code'",
+    "workflow": "echo 'Available workflows: validate, release, monitor'",
+    "certify": "echo 'Run all certification exercises' && npm run audit && npm run test && npm run lighthouse"
+  },
+  "keywords": ["tailoring", "mens-fashion", "bespoke", "claude-code-certification"],
+  "author": "Jagger Tailors",
+  "license": "MIT",
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "eslint": "^9.0.0",
+    "stylelint": "^16.0.0",
+    "html-validate": "^9.0.0",
+    "playwright": "^1.48.0",
+    "vitest": "^2.0.0",
+    "@axe-core/cli": "^4.8.0",
+    "lighthouse": "^12.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

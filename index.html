@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jagger - Premium Men's Custom Tailoring in Nizamabad. Bespoke suits, shirts, and traditional wear crafted to perfection.">
+    <meta name="keywords" content="custom tailoring, men's suits, bespoke clothing, Nizamabad tailor, Jagger">
+    <title>Jagger | Premium Men's Custom Tailoring - Nizamabad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" aria-label="Jagger - Home">
+                <span class="logo-icon">J</span>
+                <span class="logo-text">JAGGER</span>
+            </a>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active" data-section="home">Home</a>
+                <a href="#styles" class="nav-link" data-section="styles">Styles</a>
+                <a href="#about" class="nav-link" data-section="about">About</a>
+                <a href="#process" class="nav-link" data-section="process">Process</a>
+                <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">Est. 2024 • Nizamabad</div>
+            <h1 class="hero-title">
+                Crafting <span class="highlight">Excellence</span><br>One Stitch at a Time
+            </h1>
+            <p class="hero-subtitle">
+                Experience the art of bespoke tailoring at Jagger. Premium fabrics, masterful craftsmanship,
+                and personalized service for the modern gentleman.
+            </p>
+            <div class="hero-actions">
+                <a href="#styles" class="btn btn-primary">Explore Styles</a>
+                <a href="#contact" class="btn btn-secondary">Book Consultation</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Garments Crafted</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Premium Fabrics</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Style Options</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">4.9★</span>
+                    <span class="stat-label">Client Rating</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll" aria-hidden="true">
+            <span class="scroll-text">Scroll</span>
+            <svg class="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Styles Section -->
+    <section id="styles" class="styles-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Collection</span>
+                <h2 class="section-title">Predefined Styles</h2>
+                <p class="section-subtitle">Choose from our curated collection of timeless and contemporary styles, each customizable to your exact measurements and preferences.</p>
+            </div>
+
+            <!-- Style Categories -->
+            <div class="style-categories" role="tablist" aria-label="Style categories">
+                <button class="category-btn active" role="tab" aria-selected="true" data-category="all">All Styles</button>
+                <button class="category-btn" role="tab" aria-selected="false" data-category="suits">Suits & Blazers</button>
+                <button class="category-btn" role="tab" aria-selected="false" data-category="shirts">Shirts</button>
+                <button class="category-btn" role="tab" aria-selected="false" data-category="traditional">Traditional</button>
+                <button class="category-btn" role="tab" aria-selected="false" data-category="casual">Smart Casual</button>
+            </div>
+
+            <!-- Styles Grid -->
+            <div class="styles-grid" id="stylesGrid" role="tabpanel">
+                <!-- Styles will be rendered by JavaScript -->
+            </div>
+
+            <!-- Style Detail Modal -->
+            <div class="modal" id="styleModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+                <div class="modal-overlay"></div>
+                <div class="modal-content">
+                    <button class="modal-close" id="modalClose" aria-label="Close style details">&times;</button>
+                    <div class="modal-body">
+                        <div class="modal-image" id="modalImage"></div>
+                        <div class="modal-info">
+                            <span class="modal-category" id="modalCategory"></span>
+                            <h3 class="modal-title" id="modalTitle"></h3>
+                            <p class="modal-description" id="modalDescription"></p>
+                            <div class="modal-features" id="modalFeatures"></div>
+                            <div class="modal-customization">
+                                <h4>Customization Options</h4>
+                                <div class="custom-options" id="customOptions"></div>
+                            </div>
+                            <div class="modal-actions">
+                                <button class="btn btn-primary" id="selectStyleBtn">Select This Style</button>
+                                <button class="btn btn-outline" id="customizeBtn">Customize Further</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <span class="section-tag">About Jagger</span>
+                    <h2 class="section-title">Where Tradition Meets Modernity</h2>
+                    <p class="about-text">
+                        Founded in the heart of Nizamabad, Jagger represents the pinnacle of men's bespoke tailoring.
+                        Our master tailors combine generations of traditional craftsmanship with contemporary design
+                        sensibilities to create garments that are truly one-of-a-kind.
+                    </p>
+                    <p class="about-text">
+                        Every piece that leaves our workshop tells a story — of premium fabrics sourced from the
+                        world's finest mills, of precise measurements taken with meticulous care, and of countless
+                        hours of handwork that transform cloth into confidence.
+                    </p>
+                    <div class="about-features">
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Master Craftsmanship</h4>
+                                <p>30+ years of combined tailoring expertise</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Timely Delivery</h4>
+                                <p>2-3 weeks for complete bespoke orders</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Satisfaction Guaranteed</h4>
+                                <p>Unlimited alterations until perfect fit</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-frame">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 700'%3E%3Crect fill='%231a1a1a' width='600' height='700'/%3E%3Ctext x='300' y='350' font-family='Georgia,serif' font-size='24' fill='%23d4a574' text-anchor='middle' dominant-baseline='middle'%3EJAGGER%3C/text%3E%3Ctext x='300' y='390' font-family='Georgia,serif' font-size='14' fill='%23888' text-anchor='middle'%3EWORKSHOP%3C/text%3E%3C/svg%3E" alt="Jagger Tailoring Workshop" loading="lazy">
+                    </div>
+                    <div class="experience-badge">
+                        <span class="badge-number">10+</span>
+                        <span class="badge-text">Years of Excellence</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="process-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Process</span>
+                <h2 class="section-title">From Vision to Reality</h2>
+                <p class="section-subtitle">A seamless journey from your first consultation to the final fitting.</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Consultation</h3>
+                        <p>Discuss your vision, occasion, and preferences. Our style advisors guide you through fabrics, cuts, and details.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Measurement</h3>
+                        <p>Precise 30+ point measurements taken by our master tailor. Posture, asymmetry, and preferences all recorded.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Pattern Creation</h3>
+                        <p>Your unique paper pattern is hand-drafted. No blocks, no shortcuts — a pattern made exclusively for you.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h3>First Fitting</h3>
+                        <p>Basted garment fitting to assess structure, balance, and drape. Adjustments marked for perfection.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">05</div>
+                    <div class="step-content">
+                        <h3>Final Assembly</h3>
+                        <p>Hand-finishing: hand-stitched lapels, working buttonholes, hand-set sleeves. 40+ hours of craftsmanship.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">06</div>
+                    <div class="step-content">
+                        <h3>Delivery</h3>
+                        <p>Final fitting, pressing, and presentation in our signature garment bag. Lifetime alteration support included.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Selected Styles Summary -->
+    <section class="selection-section" id="selectionSection" hidden>
+        <div class="container">
+            <div class="selection-header">
+                <h3>Your Selected Styles</h3>
+                <button class="btn btn-text" id="clearSelection">Clear All</button>
+            </div>
+            <div class="selection-list" id="selectionList"></div>
+            <div class="selection-actions">
+                <a href="#contact" class="btn btn-primary">Proceed to Consultation</a>
+                <button class="btn btn-secondary" id="saveSelection">Save for Later</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <span class="section-tag">Get in Touch</span>
+                    <h2 class="section-title">Start Your Bespoke Journey</h2>
+                    <p class="contact-text">
+                        Ready to experience the Jagger difference? Book a consultation or visit our workshop in Nizamabad.
+                        We're here to bring your sartorial vision to life.
+                    </p>
+
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text-content">
+                                <h4>Visit Our Workshop</h4>
+                                <p>Shop No. 12, Beside Clock Tower<br>Main Road, Nizamabad - 503001<br>Telangana, India</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text-content">
+                                <h4>Call Us</h4>
+                                <p><a href="tel:+919090909009">+91 90909 09009</a><br>Mon-Sat: 10:00 AM - 8:00 PM<br>Sun: By Appointment Only</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6L12 13L2 6"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text-content">
+                                <h4>Email Us</h4>
+                                <p><a href="mailto:info@jaggertailors.com">info@jaggertailors.com</a><br><a href="mailto:appointments@jaggertailors.com">appointments@jaggertailors.com</a><br>Response within 24 hours</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                        <a href="#" class="social-link" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+                    </div>
+                </div>
+
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contactForm" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required autocomplete="name" placeholder="Your full name">
+                                <span class="error-message" aria-live="polite"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+91 XXXXX XXXXX">
+                                <span class="error-message" aria-live="polite"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com">
+                                <span class="error-message" aria-live="polite"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="occasion">Occasion</label>
+                                <select id="occasion" name="occasion">
+                                    <option value="">Select an occasion</option>
+                                    <option value="wedding">Wedding / Engagement</option>
+                                    <option value="business">Business / Corporate</option>
+                                    <option value="formal">Formal Event / Gala</option>
+                                    <option value="casual">Smart Casual</option>
+                                    <option value="traditional">Traditional / Festival</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message / Requirements *</label>
+                            <textarea id="message" name="message" rows="4" required placeholder="Describe your vision, preferred styles, timeline, or any specific requirements..."></textarea>
+                            <span class="error-message" aria-live="polite"></span>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="updates" name="updates">
+                            <label for="updates">Keep me updated with new collections and offers</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Book Consultation</button>
+                        <p class="form-note">We'll contact you within 24 hours to schedule your appointment.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo" aria-label="Jagger - Home">
+                        <span class="logo-icon">J</span>
+                        <span class="logo-text">JAGGER</span>
+                    </a>
+                    <p class="footer-tagline">Crafting excellence since 2024. Bespoke tailoring for the modern gentleman.</p>
+                    <div class="footer-location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        <span>Nizamabad, Telangana</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#styles">Styles</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#process">Our Process</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#styles">Suits & Blazers</a></li>
+                        <li><a href="#styles">Custom Shirts</a></li>
+                        <li><a href="#styles">Traditional Wear</a></li>
+                        <li><a href="#styles">Smart Casual</a></li>
+                        <li><a href="#styles">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><a href="tel:+919090909009">+91 90909 09009</a></li>
+                        <li><a href="mailto:info@jaggertailors.com">info@jaggertailors.com</a></li>
+                        <li><a href="mailto:appointments@jaggertailors.com">appointments@jaggertailors.com</a></li>
+                        <li>Shop 12, Beside Clock Tower, Main Road, Nizamabad - 503001</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Jagger. All rights reserved. | Crafted with precision in Nizamabad</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
