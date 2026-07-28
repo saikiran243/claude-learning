@@ -1,13 +1,13 @@
-# Gitleaks Configuration
+# Gitleaks Configuration - Fixed TOML Format
 # Detects secrets, API keys, passwords, and other sensitive data
 
-[allowlist]
-description = "Allowlisted patterns for this project"
+# Allowlist - MUST use [[allowlist]] (array of tables) for multiple entries
+[[allowlist]]
+description = "Allowlist for documentation and test files"
 paths = [
   "README.md",
   "CLAUDE.md",
   "*.md",
-  ".gitignore",
   ".gitignore",
   "package.json",
   "package-lock.json"
@@ -28,8 +28,6 @@ regexes = [
 ]
 
 # Custom rules for this project
-[rules]
-# Generic secret patterns
 [[rules]]
 description = "Generic API Key"
 regex = '''(?i)(api[_-]?key|apikey)\s*[=:]\s*["']?([a-zA-Z0-9_\-]{20,})["']?'''

@@ -24,7 +24,7 @@ on:
         default: false
 
 env:
-  NODE_VERSION: '20'
+  NODE_VERSION: '22'
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
@@ -52,7 +52,7 @@ jobs:
         run: npm ci
 
       - name: Run ESLint
-        run: npx eslint . --ext .js,.ts --format=github
+        run: npx eslint . --format=github
 
       - name: Run Stylelint
         run: npx stylelint "styles/**/*.css" --formatter=github
