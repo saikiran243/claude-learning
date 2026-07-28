@@ -93,7 +93,6 @@ jobs:
             },
             "id": 1
           }
-EOF
           else
             echo "No Terraform files found"
           fi
