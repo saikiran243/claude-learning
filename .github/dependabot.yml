@@ -1,0 +1,119 @@
+# Dependabot Configuration
+# Automated dependency updates for security and maintenance
+
+version: 2
+updates:
+  # npm dependencies (including MCP server dependencies)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "npm"
+    commit-message:
+      prefix: "chore(deps):"
+      prefix-development: "chore(deps-dev):"
+      include: "scope"
+    groups:
+      dev-dependencies:
+        patterns:
+          - "*"
+          - "@types/*"
+          - "eslint*"
+          - "prettier*"
+          - "vitest*"
+          - "playwright*"
+          - "@axe-core/*"
+        update-types:
+          - "minor"
+          - "patch"
+      mcp-servers:
+        patterns:
+          - "@modelcontextprotocol/*"
+          - "zod"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # npm dependencies for each MCP server
+  - package-ecosystem: "npm"
+    directory: "/.claude/mcp-servers/tailoring-catalog"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:30"
+    labels:
+      - "dependencies"
+      - "mcp"
+      - "tailoring-catalog"
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: "npm"
+    directory: "/.claude/mcp-servers/design-system"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "10:00"
+    labels:
+      - "dependencies"
+      - "mcp"
+      - "design-system"
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: "npm"
+    directory: "/.claude/mcp-servers/analytics"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "10:30"
+    labels:
+      - "dependencies"
+      - "mcp"
+      - "analytics"
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: "npm"
+    directory: "/.claude/mcp-servers/security-scanner"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "11:00"
+    labels:
+      - "dependencies"
+      - "mcp"
+      - "security"
+    open-pull-requests-limit: 5
+
+  # GitHub Actions updates
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "11:30"
+      timezone: "UTC"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "ci:"
+      include: "scope"
+
+  # Docker base image updates (if using Docker)
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "docker"

@@ -1,0 +1,114 @@
+# Gitleaks Configuration
+# Detects secrets, API keys, passwords, and other sensitive data
+
+[allowlist]
+description = "Allowlisted patterns for this project"
+paths = [
+  "README.md",
+  "CLAUDE.md",
+  "*.md",
+  ".gitignore",
+  ".gitignore",
+  "package.json",
+  "package-lock.json"
+]
+
+# Allow specific patterns that are not secrets
+[[allowlist]]
+description = "Allow placeholder/example values"
+regexes = [
+  "YOUR_API_KEY",
+  "YOUR_SECRET",
+  "EXAMPLE_KEY",
+  "TEST_SECRET",
+  "sk_test_",
+  "pk_test_",
+  "ghp_test",
+  "placeholder"
+]
+
+# Custom rules for this project
+[rules]
+# Generic secret patterns
+[[rules]]
+description = "Generic API Key"
+regex = '''(?i)(api[_-]?key|apikey)\s*[=:]\s*["']?([a-zA-Z0-9_\-]{20,})["']?'''
+tags = ["key", "api"]
+
+[[rules]]
+description = "Generic Secret"
+regex = '''(?i)(secret|password|passwd|pwd)\s*[=:]\s*["']?([a-zA-Z0-9_\-]{8,})["']?'''
+tags = ["secret", "password"]
+
+# Cloud provider keys
+[[rules]]
+description = "AWS Access Key"
+regex = '''(?i)AKIA[0-9A-Z]{16}'''
+tags = ["key", "aws"]
+
+[[rules]]
+description = "AWS Secret Key"
+regex = '''(?i)aws[_-]?secret[_-]?access[_-]?key\s*[=:]\s*["']?([a-zA-Z0-9/+=]{40})["']?'''
+tags = ["secret", "aws"]
+
+[[rules]]
+description = "GitHub Token"
+regex = '''(?i)gh[pousr]_[a-zA-Z0-9]{36}'''
+tags = ["token", "github"]
+
+[[rules]]
+description = "GitHub App Token"
+regex = '''(?i)github[_-]?app[_-]?token\s*[=:]\s*["']?([a-zA-Z0-9]{40,})["']?'''
+tags = ["token", "github"]
+
+# Database connections
+[[rules]]
+description = "PostgreSQL Connection String"
+regex = '''(?i)postgres://[^:]+:[^@]+@[^:]+:\d+/[\w-]+'''
+tags = ["connection", "database"]
+
+[[rules]]
+description = "MongoDB Connection String"
+regex = '''(?i)mongodb://[^:]+:[^@]+@[^:]+:\d+/[\w-]+'''
+tags = ["connection", "database"]
+
+# Private keys
+[[rules]]
+description = "Private Key"
+regex = '''(?i)-----BEGIN (RSA|EC|DSA|OPENSSH) PRIVATE KEY-----'''
+tags = ["key", "private"]
+
+# Anthropic API
+[[rules]]
+description = "Anthropic API Key"
+regex = '''(?i)sk-ant-[a-zA-Z0-9\-_]{95}'''
+tags = ["key", "anthropic"]
+
+# Generic tokens
+[[rules]]
+description = "Bearer Token"
+regex = '''(?i)bearer\s+[a-zA-Z0-9\._\-]{20,}'''
+tags = ["token", "auth"]
+
+[[rules]]
+description = "JWT Token"
+regex = '''(?i)eyJ[a-zA-Z0-9_\-]*\.[a-zA-Z0-9_\-]*\.[a-zA-Z0-9_\-]*'''
+tags = ["token", "jwt"]
+
+# Slack tokens
+[[rules]]
+description = "Slack Token"
+regex = '''(?i)xox[baprs]-[a-zA-Z0-9-]{10,}'''
+tags = ["token", "slack"]
+
+# Vercel
+[[rules]]
+description = "Vercel Token"
+regex = '''(?i)vercel[_-]?token\s*[=:]\s*["']?([a-zA-Z0-9]{20,})["']?'''
+tags = ["token", "vercel"]
+
+# Generic patterns that might be false positives
+[[rules]]
+description = "Generic Token Pattern (lenient)"
+regex = '''(?i)(token|key|secret)\s*[=:]\s*["']([a-zA-Z0-9_\-]{16,})["']'''
+tags = ["token", "generic"]

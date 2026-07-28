@@ -1,0 +1,56 @@
+# CODEOWNERS
+# These users/teams will be automatically requested for review when code they own is modified
+
+# Global owners (review everything)
+* @saikiran243
+
+# Documentation
+*.md @saikiran243
+
+# CI/CD Workflows
+.github/workflows/ @saikiran243
+.github/dependabot.yml @saikiran243
+
+# MCP Servers
+.claude/mcp-servers/ @saikiran243
+
+# Agents
+.claude/agents/ @saikiran243
+
+# Scripts
+.claude/scripts/ @saikiran243
+
+# Guardrails
+.claude/guardrails.json @saikiran243
+.claude/scripts/validate.js @saikiran243
+
+# Frontend
+index.html @saikiran243
+styles.css @saikiran243
+script.js @saikiran243
+
+# Configuration
+package.json @saikiran243
+.lighthouserc.json @saikiran243
+vercel.json @saikiran243
+.gitignore @saikiran243
+
+# Security
+.gitleaks.toml @saikiran243
+.claude/guardrails.json @saikiran243
+
+# Documentation
+README.md @saikiran243
+CLAUDE.md @saikiran243
+LEARNING_ROADMAP.md @saikiran243
+CERTIFICATION_EXERCISES.md @saikiran243
+INFRA_TO_AI_ARCHITECT.md @saikiran243
+AI_ENGINEER_ROLE.md @saikiran243
+GITOPS.md @saikiran243
+GITHUB_INTEGRATION.md @saikiran243
+GITHUB_AUTH.md @saikiran243
+MCP_CONFIG.md @saikiran243
+MCP_USAGE_GUIDE.md @saikiran243
+QUICK_REFERENCE.md @saikiran243
+HANDS_ON_SESSION.md @saikiran243
+INDEX.md @saikiran243

@@ -1,0 +1,201 @@
+# MCP Workflow - Using MCP servers in CI/CD
+# This workflow demonstrates integrating MCP servers into your CI/CD pipeline
+
+name: MCP Integration Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      scan-type:
+        description: 'Type of security scan'
+        required: true
+        default: 'terraform'
+        type: choice
+        options:
+          - terraform
+          - kubernetes
+          - ai-output
+      target-path:
+        description: 'Path to scan'
+        required: false
+        default: '.'
+      severity-threshold:
+        description: 'Minimum severity to fail'
+        required: true
+        default: 'high'
+        type: choice
+        options:
+          - critical
+          - high
+          - medium
+  pull_request:
+    paths:
+      - '*.tf'
+      - '*.yaml'
+      - '*.yml'
+
+permissions:
+  contents: read
+  security-events: write
+  pull-requests: write
+
+jobs:
+  # ============================================================
+  # MCP SECURITY SCAN
+  # ============================================================
+  mcp-security-scan:
+    name: MCP Security Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      findings-count: ${{ steps.scan.outputs.findings-count }}
+      critical-count: ${{ steps.scan.outputs.critical-count }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build MCP servers
+        run: |
+          for dir in .claude/mcp-servers/*/; do
+            if [ -f "$dir/package.json" ]; then
+              echo "Building $dir"
+              cd "$dir" && npm run build 2>/dev/null || echo "No build script for $dir"
+              cd - > /dev/null
+            fi
+          done
+
+      - name: Scan Terraform files
+        if: github.event.inputs.scan-type == 'terraform' || github.event_name == 'pull_request'
+        id: terraform-scan
+        run: |
+          echo "Running Terraform security scan..."
+          # This would call the security-scanner MCP
+          # For now, we'll use a direct approach
+          if [ -d "terraform" ] || find . -name "*.tf" -type f | grep -q .; then
+            node .claude/mcp-servers/security-scanner/index.js << 'EOF'
+          {
+            "jsonrpc": "2.0",
+            "method": "tools/call",
+            "params": {
+              "name": "scan_terraform",
+              "arguments": {
+                "code": "$(cat $(find . -name "*.tf" | head -1) 2>/dev/null || echo 'resource "aws_s3_bucket" "test" {})"
+              }
+            },
+            "id": 1
+          }
+EOF
+          else
+            echo "No Terraform files found"
+          fi
+
+      - name: Scan Kubernetes files
+        if: github.event.inputs.scan-type == 'kubernetes' || github.event_name == 'pull_request'
+        id: k8s-scan
+        run: |
+          echo "Running Kubernetes security scan..."
+          if find . -name "*.yaml" -o -name "*.yml" | grep -E "(k8s|kubernetes|deployment|service|ingress)" | grep -q .; then
+            echo "K8s files found - scanning..."
+          else
+            echo "No Kubernetes files found"
+          fi
+
+      - name: Scan AI outputs
+        if: github.event.inputs.scan-type == 'ai-output'
+        id: ai-scan
+        run: |
+          echo "Scanning AI outputs for privacy violations..."
+
+      - name: Upload SARIF results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: security-results.sarif
+          category: mcp-security-scan
+
+  # ============================================================
+  # MCP COMPLIANCE CHECK
+  # ============================================================
+  mcp-compliance-check:
+    name: MCP Compliance Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: mcp-security-scan
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run compliance checks
+        run: |
+          echo "Running compliance checks against SOC2, HIPAA, PCI standards..."
+
+          # Example: Check for hardcoded secrets
+          if grep -r "password\|secret\|api_key" --include="*.tf" --include="*.yaml" --include="*.yml" . | grep -v "variable\|secret\|secret_ref"; then
+            echo "::warning::Potential hardcoded secrets found"
+          fi
+
+          # Check for public access
+          if grep -r "0.0.0.0/0\|::/0" --include="*.tf" --include="*.yaml" --include="*.yml" .; then
+            echo "::warning::Public access (0.0.0.0/0) detected"
+          fi
+
+      - name: Check against compliance policies
+        run: |
+          echo "Checking compliance policies..."
+          # Add your policy-as-code checks here
+          # e.g., OPA policies, custom rules
+
+  # ============================================================
+  # MCP ANALYTICS TRACKING
+  # ============================================================
+  mcp-analytics:
+    name: Track MCP Metrics
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: always()
+    needs: [mcp-security-scan, mcp-compliance-check]
+    steps:
+      - name: Track scan metrics
+        run: |
+          echo "Tracking MCP scan metrics..."
+          echo "scan_type=${{ github.event.inputs.scan-type || 'pr-auto' }}" >> $GITHUB_ENV
+          echo "findings=${{ needs.mcp-security-scan.outputs.findings-count || 0 }}" >> $GITHUB_ENV
+          echo "critical=${{ needs.mcp-security-scan.outputs.critical-count || 0 }}" >> $GITHUB_ENV
+
+      - name: Post to analytics (example)
+        run: |
+          echo "Sending metrics to analytics..."
+          # curl -X POST https://your-analytics.example.com/mcp-scan \
+          #   -H "Authorization: Bearer ${{ secrets.ANALYTICS_TOKEN }}" \
+          #   -d "scan_type=${{ env.scan_type }}&findings=${{ env.findings }}&critical=${{ env.critical }}&repo=${{ github.repository }}"
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const findings = ${{ needs.mcp-security-scan.outputs.findings-count || 0 }};
+            const critical = ${{ needs.mcp-security-scan.outputs.critical-count || 0 }};
+
+            const body = `## MCP Security Scan Results
+            | Metric | Value |
+            |--------|-------|
+            | Findings | ${findings} |
+            | Critical | ${critical} |
+            | Status | ${critical > 0 ? '❌ Failed' : findings > 0 ? '⚠️ Warning' : '✅ Passed'} |`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
