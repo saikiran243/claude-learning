@@ -309,7 +309,7 @@ jobs:
           prefix: '## '
 
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.ref_name }}
           release_name: Release ${{ github.ref_name }}
