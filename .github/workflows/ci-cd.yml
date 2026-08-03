@@ -64,7 +64,7 @@ jobs:
         run: node .claude/scripts/validate.js || echo "Guardrails check completed"
 
       - name: Secret scanning (Gitleaks)
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@v3
         with:
           config: .gitleaks.toml
 
