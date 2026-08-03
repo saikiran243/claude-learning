@@ -219,7 +219,7 @@ jobs:
       url: https://staging-${{ github.repository }}.vercel.app
     steps:
       - name: Deploy to Vercel (Staging)
-        uses: amondnet/vercel-action@v25
+        uses: amondnet/vercel-action@v42
         if: hashFiles('vercel.json') != ''
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
@@ -246,7 +246,7 @@ jobs:
       url: https://${{ github.repository }}.vercel.app
     steps:
       - name: Deploy to Vercel (Production)
-        uses: amondnet/vercel-action@v25
+        uses: amondnet/vercel-action@v42
         if: hashFiles('vercel.json') != ''
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
