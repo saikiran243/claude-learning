@@ -9,7 +9,7 @@
     "dev": "node --watch index.js"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@modelcontextprotocol/sdk": "^1.31.0",
     "zod": "^3.22.0"
   },
   "keywords": ["security", "scanner", "terraform", "kubernetes", "ci-cd"],
